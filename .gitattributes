@@ -1,1 +1,1 @@
-*.hack linguist-vendored
+*.hack linguist-vendored=false

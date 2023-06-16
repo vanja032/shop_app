@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION))
+    session_start();
+
+if (isset($_SESSION["user"]))
+    header("Location: index.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +70,7 @@
                     </div>
                 </div>
                 <p class="mt-3 color-custom2 px-4">You already have an account? <a class="link-custom1"
-                        href="login.php">Login</a></p>
+                        href="login.php"><strong>Login</strong></a></p>
             </div>
         </div>
     </div>

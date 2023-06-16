@@ -7,7 +7,14 @@ require_once "../utils/validation.php";
 class DAOUser
 {
     private $database;
-    private $INSERT_USER = "INSERT INTO users (first_name, last_name, username, email, password_hash, profile_picture, role_id, created) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+    private $INSERT_USER = "INSERT INTO users (first_name, last_name, username, email, password_hash, profile_picture, role_id, created) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+
+    private $FIND_USER = "SELECT u.user_id, u.first_name, u.last_name, u.username, u.email, u.password_hash, 
+    u.profile_picture, u.role_id, u.created AS u_created, r.name, r.description, r.created AS r_created
+    FROM users u INNER JOIN roles r
+    ON u.role_id = r.role_id
+    WHERE username = ? OR email = ?";
 
     public function __construct()
     {
@@ -37,6 +44,25 @@ class DAOUser
             }
         } catch (Exception $ex) {
             return false;
+        }
+    }
+
+    public function LoginUser($username)
+    {
+        try {
+            $statement = $this->database->prepare($this->FIND_USER);
+            $statement->bindValue(1, validate($username));
+            $statement->bindValue(2, validate($username));
+
+            $statement->execute();
+
+            if ($result = $statement->fetch()) {
+                return $result;
+            } else {
+                return null;
+            }
+        } catch (Exception $ex) {
+            return null;
         }
     }
 }

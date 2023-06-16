@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION))
+    session_start();
+
+if (isset($_SESSION["user"]))
+    header("Location: index.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +15,9 @@
     <link rel="icon" type="image/png" href="media/logo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/utils/jquery.min.js"></script>
+    <script type="module" src="js/login.js"></script>
 </head>
 
 <body class="bg-custom1">
@@ -20,7 +30,7 @@
                         <h3 class="text-center color-custom1">Login</h3>
                     </div>
                     <div class="card-body bg-custom3">
-                        <form>
+                        <form id="login">
                             <div class="form-group">
                                 <label for="username" class="color-custom2">Username</label>
                                 <input type="text" id="username" class="form-control input"
@@ -32,13 +42,14 @@
                                 <input type="password" id="password" class="form-control input"
                                     placeholder="Enter your password" required name="password" autocomplete="off">
                             </div>
-                            <p class="color-custom3">Message</p>
-                            <button type="submit" class="btn btn-primary btn-block login mt-3">Login</button>
+                            <p id="message" class="color-custom3"></p>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-block login mt-2">Login</button>
                         </form>
                     </div>
                 </div>
                 <p class="mt-3 color-custom2 px-4">You do not have an account? <a class="link-custom1"
-                        href="signup.php">Signup</a></p>
+                        href="signup.php"><strong>Signup</strong></a></p>
             </div>
         </div>
     </div>

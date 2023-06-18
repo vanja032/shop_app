@@ -14,12 +14,16 @@ class DAORole
 
     public function GetRole($role_name)
     {
-        $statement = $this->database->prepare($this->READ_ROLE);
-        $statement->bindValue(1, $role_name);
+        try {
+            $statement = $this->database->prepare($this->READ_ROLE);
+            $statement->bindValue(1, $role_name);
 
-        $statement->execute();
-        $result = $statement->fetch();
-        return $result;
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        } catch (Exception $ex) {
+            return null;
+        }
     }
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2023 at 12:55 PM
+-- Generation Time: Jun 19, 2023 at 01:54 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -34,6 +34,23 @@ CREATE TABLE `categories` (
   `description` varchar(200) DEFAULT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `name`, `description`, `created`) VALUES
+(1, 'Garden', 'Garden category involves items that are used in the garden', '2023-06-18 23:07:00'),
+(2, 'Devices', 'Home devices', '2023-06-18 23:11:57'),
+(3, 'PC and Mobile', 'PC and Mobile devices', '2023-06-18 23:12:22'),
+(4, 'Home tools', 'Home tools and devices', '2023-06-18 23:12:49'),
+(5, 'Food and drinks', 'Items that are used in the kitchen', '2023-06-18 23:14:05'),
+(6, 'Beauty', 'Items for beauty', '2023-06-18 23:14:37'),
+(7, 'Fashion', 'Clothes and footwear', '2023-06-18 23:15:16'),
+(8, 'Toys', 'Toys for kids', '2023-06-18 23:15:30'),
+(9, 'Car tools', 'Items for car styling and repairing', '2023-06-18 23:16:10'),
+(10, 'Sports and travel', 'Sports and travel', '2023-06-18 23:16:27'),
+(11, 'Other', 'Other categories', '2023-06-18 23:16:42');
 
 -- --------------------------------------------------------
 
@@ -178,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `items`

@@ -3,7 +3,7 @@ body,
 html {
     margin: 0;
     padding: 0;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
 }
 
@@ -50,6 +50,14 @@ html {
 }
 
 /*LOGIN*/
+.login-card {
+    background-color: #24242400;
+}
+
+.login-logo {
+    width: 50%;
+}
+
 .input {
     background-color: #2c2c2c;
     border: 0.1em solid #b3b3b3;
@@ -77,6 +85,94 @@ html {
     border: 0.15em solid #ffa600;
 }
 
+/*NAVBAR*/
+.page-logo {
+    height: 50px;
+}
+
+.navbar-dark .navbar-nav .nav-link,
+.dropdown-item {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.dropdown-item:hover {
+    color: #ffa600;
+    background-color: #2b2b2b00;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link {
+    color: #ffa600;
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link:hover {
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    background-color: #2b2b2b00;
+    border: 0.1em solid #ffa600;
+}
+
+@media (min-width: 992px) {
+    .dropdown-menu-profile {
+        background-color: #2b2b2b;
+        transform: translateX(-100%);
+        margin-left: 6em;
+    }
+}
+
+.sidebar {
+    background-color: #585858;
+}
+
+.sidebar-sticky .nav .nav-item .nav-link {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.sidebar-sticky .nav .nav-item .nav-link:hover {
+    color: #ffa600;
+
+}
+
+.sidebar-sticky .nav .nav-item .active {
+    color: #ffa600;
+    font-weight: 500;
+}
+
+/*FOOTER*/
+.footer {
+    background-color: #3d3d3d;
+}
+
+.copyright {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.copyright .cp-symbol {
+    color: #ffa600;
+}
+
+.social-icons {
+    color: #ffffff;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.social-icons a {
+    color: #ffffff;
+}
+
+.social-icons a:hover {
+    color: #ffa600;
+}
 
 
 /*VALIDATION*/

@@ -13,7 +13,7 @@ if (isset($_SESSION["user"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop - Login Page</title>
     <link rel="icon" type="image/png" href="media/logo.png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script type="text/javascript" src="js/utils/jquery.min.js"></script>
@@ -24,8 +24,11 @@ if (isset($_SESSION["user"]))
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-8">
-                <div class="card mt-5 border-custom1">
+            <div class="col-lg-4 col-md-6 col-sm-8 py-4 my-4">
+                <div class="col-12 d-flex justify-content-center">
+                    <img class="card-img-top login-logo" src="media/logo.png" alt="Shop App logo">
+                </div>
+                <div class="card mt-5 border-custom1 login-card">
                     <div class="card-header bg-custom2" style="border-radius: 0;">
                         <h3 class="text-center color-custom1">Login</h3>
                     </div>
@@ -54,7 +57,7 @@ if (isset($_SESSION["user"]))
         </div>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,17 +1,17 @@
 <?php
 require_once "../models/structures/User.php";
+require_once "../models/DAOCategory.php";
 
 if (!isset($_SESSION))
     session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Home Page</title>
+    <title>Shop - Shop Page</title>
     <link rel="icon" type="image/png" href="media/logo.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -21,6 +21,11 @@ if (!isset($_SESSION))
 </head>
 
 <body class="bg-custom1 d-flex flex-column">
+
+    <?php
+    $category_dao = new DAOCategory();
+    $categories = $category_dao->GetAll();
+    ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom2 py-3 px-5">
         <a class="navbar-brand" href="shop.php"><img class="page-logo pr-4" src="media/logo.png" style="height: 50px;">
@@ -32,11 +37,29 @@ if (!isset($_SESSION))
 
         <div class="collapse navbar-collapse my-4 my-lg-1" id="topMenu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item px-2 active">
+                <li class="nav-item px-2">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2 active">
                     <a class="nav-link" href="shop.php">Shop</a>
+                </li>
+                <li class="nav-item dropdown d-lg-none">
+                    <a class="nav-link px-2 dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">All categories</a>
+
+                        <?php
+                        foreach ($categories as $category) {
+                            ?>
+                            <a class="dropdown-item" href="#">
+                                <?= $category->name ?>
+                            </a>
+                            <?php
+                        }
+                        ?>
+                    </div>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link" href="#">About</a>
@@ -71,7 +94,7 @@ if (!isset($_SESSION))
                             ?>
                             <a class="dropdown-item" href="#">Dashboard</a>
                             <a class="dropdown-item"
-                                href="../controllers/logout_controller.php?action=logout&location=index">Logout</a>
+                                href="../controllers/logout_controller.php?action=logout&location=shop">Logout</a>
                         </div>
                     </li>
                     <?php
@@ -81,6 +104,37 @@ if (!isset($_SESSION))
         </div>
     </nav>
 
+    <div class="container-fluid px-auto">
+        <div class="row">
+            <nav class="col-md-2 d-none d-lg-block sidebar py-4">
+                <div class="sidebar-sticky d-flex flex-column">
+                    <ul class="nav flex-column">
+                        <li class="nav-item py-2">
+                            <a class="nav-link active" href="#">
+                                All categories
+                            </a>
+                        </li>
+                        <?php
+                        foreach ($categories as $category) {
+                            ?>
+                            <li class="nav-item py-2">
+                                <a class="nav-link" href="#">
+                                    <?= $category->name ?>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                    <div class="flex-grow-1"></div>
+                </div>
+            </nav>
+
+            <main role="main" class="col ml-sm-auto px-0">
+
+            </main>
+        </div>
+    </div>
     <div class="flex-grow-1"></div>
     <footer class="footer">
         <div class="row py-4 px-5 m-0">

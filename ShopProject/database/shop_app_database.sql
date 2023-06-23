@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2023 at 01:54 AM
+-- Generation Time: Jun 23, 2023 at 07:20 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -67,6 +67,13 @@ CREATE TABLE `items` (
   `price` double NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`item_id`, `name`, `description`, `category_id`, `picture_url`, `price`, `quantity`) VALUES
+(1, 'Tom Tailor Parfem for him, 30ml', 'Živi svoj život. Deli svoju sreću, bez kompromisa. Jesi li spreman da kažes da?\r\nU nemirnim vremenima globalne tuge, čeznemo za bezbrižnom srećom. Samo hrabar optimizam je jedina posledica. Usudite se biti autentični, usudite se reći DA avanturama. Idite tamo gde vas slave, ne gde vas tolerišu!', 6, 'https://www.shoppster.rs/cdn-cgi/image/format=auto/https://www.shoppster.rs/medias/4051395172144-01-1-ung-680Wx510H?context=bWFzdGVyfGltYWdlc3wzMTUyOXxpbWFnZS9qcGVnfGFEbGtMMmc0Wmk4eE1UYzFOemd5T1RZMU1qVXhNQzgwTURVeE16azFNVGN5TVRRMFh6QXhYekZmZFc1bkxUWTRNRmQ0TlRFd1NBfDczMmVlNDQzOWQxNGVmMmQxYmI3MWJhY2QxZTEyYWMwZjA5NzY1ZmIwYzk3YzQ4NzM3MTAwZDA5MGZiN2QxMDI', 21.99, 5);
 
 -- --------------------------------------------------------
 
@@ -138,7 +145,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `username`, `email`, `password_hash`, `profile_picture`, `role_id`, `created`) VALUES
-(20, 'Petar', 'Petrovic', 'petar123', 'petar@email.com', 'd38031a34777569cb437ba620952f099e62c9cf4746313c23370a936a5093dbf47b0dad05670567ec507ddadac210ff29dba3b835558c10ced16829c367cbcc5', '', 1, '2023-06-16 12:29:01');
+(20, 'Petar', 'Petrovic', 'petar123', 'petar@email.com', 'd38031a34777569cb437ba620952f099e62c9cf4746313c23370a936a5093dbf47b0dad05670567ec507ddadac210ff29dba3b835558c10ced16829c367cbcc5', '', 1, '2023-06-16 12:29:01'),
+(21, 'Zikica', 'Zikica', 'zikica123', 'zikica@gmail.com', '23e9b276dcba452db20af6af4b18822fb964ccc400506b48711c74b36d5787687ad1199a398e66cd14c2bc39e1179128ca6529180675bcb5373b9d3a4a163881', '', 1, '2023-06-22 10:49:47');
 
 --
 -- Indexes for dumped tables
@@ -201,7 +209,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -225,7 +233,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

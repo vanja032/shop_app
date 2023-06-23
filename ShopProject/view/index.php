@@ -1,5 +1,6 @@
 <?php
 require_once "../models/structures/User.php";
+require_once "../controllers/items_controller.php";
 
 if (!isset($_SESSION))
     session_start();
@@ -22,64 +23,10 @@ if (!isset($_SESSION))
 
 <body class="bg-custom1 d-flex flex-column">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom2 py-3 px-5">
-        <a class="navbar-brand" href="shop.php"><img class="page-logo pr-4" src="media/logo.png" style="height: 50px;">
-            Shop App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topMenu"
-            aria-controls="topMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse my-4 my-lg-1" id="topMenu">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item px-2 active">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="shop.php">Shop</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <?php
-                if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
-                    ?>
-                    <li class="nav-item px-2">
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
-                    <?php
-                }
-                ?>
-                <?php
-                if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
-                    ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link px-2 dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                            User <i class="fa fa-user-circle" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-profile">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <?php
-                            if (strtolower($_SESSION["user"]->role->name) === "user") {
-                                ?>
-                                <a class="dropdown-item" href="#">My orders</a>
-                                <?php
-                            }
-                            ?>
-                            <a class="dropdown-item" href="#">Dashboard</a>
-                            <a class="dropdown-item"
-                                href="../controllers/logout_controller.php?action=logout&location=index">Logout</a>
-                        </div>
-                    </li>
-                    <?php
-                }
-                ?>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    $page = "home";
+    require_once("components/nav.php");
+    ?>
 
     <div class="flex-grow-1"></div>
     <footer class="footer">

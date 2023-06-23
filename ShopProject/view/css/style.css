@@ -24,12 +24,20 @@ html {
     background-color: #2b2b2b;
 }
 
+.bg-custom5 {
+    background-color: #4d4d4d;
+}
+
 .color-custom1 {
     color: #ffa600;
 }
 
 .color-custom2 {
     color: #c2c2c2;
+}
+
+.color-custom4 {
+    color: #ffffff;
 }
 
 .link-custom1 {
@@ -112,6 +120,16 @@ html {
     color: #ffffff;
 }
 
+.dropdown-menu .active {
+    color: #ffa600;
+    font-weight: 500;
+    background-color: #24242400;
+}
+
+.dropdown-menu .active:hover {
+    color: #ffffff;
+}
+
 .dropdown-menu {
     background-color: #2b2b2b00;
     border: 0.1em solid #ffa600;
@@ -172,6 +190,21 @@ html {
 
 .social-icons a:hover {
     color: #ffa600;
+}
+
+
+/*SHOP*/
+.add-to-cart {
+    background-color: #ffa600;
+    color: #2c2c2c;
+    border: none;
+    border: 0.15em solid #ffa600;
+}
+
+.add-to-cart:hover {
+    background-color: #2c2c2c;
+    color: #e2e2e2;
+    border: 0.15em solid #ffa600;
 }
 
 

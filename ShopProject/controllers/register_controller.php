@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["f_name"]) && isset($_POST["l_name"]) && isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"])) {
         if (!empty($_POST["f_name"]) && !empty($_POST["l_name"]) && !empty($_POST["email"]) && !empty($_POST["username"]) && !empty($_POST["password"])) {
 
-            $user = new User(null, $_POST["f_name"], $_POST["l_name"], $_POST["email"], $_POST["username"], "", null, null, null, null);
+            $user = new User(null, $_POST["f_name"], $_POST["l_name"], $_POST["email"], $_POST["username"], "", "", null, null, null, null);
             $user_dao = new DAOUser();
             $result = $user_dao->RegisterUser($user, $_POST["password"]);
 

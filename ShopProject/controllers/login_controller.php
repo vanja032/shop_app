@@ -20,9 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $salt = substr($password_hash, strlen($password_hash) / 2);
 
                 if (hash("sha256", "$password$salt") === $hash) {
+                    $role = new Role($result["role_id"], $result["name"], $result["description"], $result["r_created"]);
                     $user = new User(
                         $result["user_id"], $result["first_name"], $result["last_name"], $result["email"], $result["username"],
-                        $result["profile_picture"], $result["u_created"], $result["role_id"], $result["name"], $result["description"], $result["r_created"]
+                        $result["profile_picture"], $result["u_created"],
+                        $role
                     );
                     $_SESSION["user"] = $user;
 

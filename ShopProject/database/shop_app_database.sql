@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 07:20 PM
+-- Generation Time: Jun 26, 2023 at 01:11 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -78,15 +78,28 @@ INSERT INTO `items` (`item_id`, `name`, `description`, `category_id`, `picture_u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `items_orders`
+--
+
+CREATE TABLE `items_orders` (
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_id` bigint(20) NOT NULL,
+  `item_id` bigint(20) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '1',
+  `memo` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `order_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `item_id` bigint(20) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL
+  `status_id` int(11) NOT NULL,
+  `memo` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -166,12 +179,19 @@ ALTER TABLE `items`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `items_orders`
+--
+ALTER TABLE `items_orders`
+  ADD PRIMARY KEY (`created`,`order_id`,`item_id`),
+  ADD KEY `item_id` (`item_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `item_id` (`item_id`),
   ADD KEY `status_id` (`status_id`);
 
 --
@@ -246,11 +266,17 @@ ALTER TABLE `items`
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
 --
+-- Constraints for table `items_orders`
+--
+ALTER TABLE `items_orders`
+  ADD CONSTRAINT `item_id` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
+  ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`);
 
 --

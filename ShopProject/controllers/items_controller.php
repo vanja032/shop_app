@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 break;
 
             default:
-                $items = $item_dao->GetCat($_GET["category"]);
+                $items = $item_dao->GetByCategory($_GET["category"]);
                 $category_name = $_GET["category"];
                 break;
         }

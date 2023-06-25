@@ -36,7 +36,6 @@ class DAOUser
             $statement->bindValue(7, $user_role["role_id"]);
 
             $result = $statement->execute();
-
             if ($result) {
                 return true;
             } else {

@@ -49,6 +49,10 @@ if (!isset($_SESSION))
                             <p class="card-text">
                                 <?= substr($item->description, 0, 70) ?>...
                             </p>
+                            <p class="card-text color-custom1">
+                                Available:
+                                <?= ($item->quantity == 1) ? $item->quantity . "pc" : $item->quantity . "pcs" ?>
+                            </p>
                             <h6 class="card-text color-custom1">
                                 <?= $item->price ?> eur
                             </h6>

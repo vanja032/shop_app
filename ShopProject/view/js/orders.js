@@ -1,162 +1,11 @@
-function AddToCart(item_id, element) {
-    try {
-        const quantity = $(element).parent().children('.quantity-container:first').children('input:first').val();
-        $.ajax({
-            url: "../controllers/cart_controller.php",
-            method: "POST",
-            data: {
-                action: "add-to-cart",
-                item_id: item_id,
-                quantity: quantity
-            },
-            success: function (response) {
-                // Handle the successful response from the server
-                try {
-                    response = JSON.parse(response);
-                    if (response.hasOwnProperty("status")) {
-                        if (response["status"]) {
-                            $(".cart-items-number").each(function () {
-                                $(this).text(`${response["items_count"]}`);
-                            });
-                            $(element).parent().children('.quantity-container:first').children('input:first').val(1);
-
-                            $("#toast_message").text(response["message"]);
-                            $("#toast").addClass("valid-bg");
-                            $("#toast").animate({
-                                left: "3vw"
-                            }, 700, function () {
-                                setTimeout(function () {
-                                    $("#toast").animate({
-                                        left: "-20vw"
-                                    }, 1000, function () {
-                                        $("#toast_message").text("");
-                                        $("#toast").removeClass("valid-bg");
-                                    });
-                                }, 700);
-                            });
-                        } else {
-                            $("#toast_message").text(response["message"]);
-                            $("#toast").addClass("invalid-bg");
-                            $("#toast").animate({
-                                left: "3vw"
-                            }, 700, function () {
-                                setTimeout(function () {
-                                    $("#toast").animate({
-                                        left: "-20vw"
-                                    }, 1000, function () {
-                                        $("#toast_message").text("");
-                                        $("#toast").removeClass("invalid-bg");
-                                    });
-                                }, 700);
-                            });
-                        }
-                    }
-                }
-                catch (error) { }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                // Handle any errors that occurred during the request
-                $("#toast_message").text("Error while adding the item to the cart");
-                $("#toast").addClass("invalid-bg");
-                $("#toast").animate({
-                    left: "3vw"
-                }, 700, function () {
-                    setTimeout(function () {
-                        $("#toast").animate({
-                            left: "-20vw"
-                        }, 1000, function () {
-                            $("#toast_message").text("");
-                            $("#toast").removeClass("invalid-bg");
-                        });
-                    }, 700);
-                });
-            }
-        });
-    }
-    catch (error) { }
-}
-
-function ClearCart() {
-    try {
-        $.ajax({
-            url: "../controllers/cart_controller.php",
-            method: "GET",
-            data: {
-                action: "clear"
-            },
-            success: function (response) {
-                // Handle the successful response from the server
-                try {
-                    response = JSON.parse(response);
-                    if (response.hasOwnProperty("status")) {
-                        if (response["status"]) {
-                            $(".cart-items-number").each(function () {
-                                $(this).text(`${response["items_count"]}`);
-                            });
-
-                            $("#toast_message").text(response["message"]);
-                            $("#toast").addClass("valid-bg");
-                            $("#toast").animate({
-                                left: "3vw"
-                            }, 700, function () {
-                                setTimeout(function () {
-                                    $("#toast").animate({
-                                        left: "-20vw"
-                                    }, 1000, function () {
-                                        $("#toast_message").text("");
-                                        $("#toast").removeClass("valid-bg");
-                                    });
-                                }, 700);
-                            });
-                        } else {
-                            $("#toast_message").text(response["message"]);
-                            $("#toast").addClass("invalid-bg");
-                            $("#toast").animate({
-                                left: "3vw"
-                            }, 700, function () {
-                                setTimeout(function () {
-                                    $("#toast").animate({
-                                        left: "-20vw"
-                                    }, 1000, function () {
-                                        $("#toast_message").text("");
-                                        $("#toast").removeClass("invalid-bg");
-                                    });
-                                }, 700);
-                            });
-                        }
-                    }
-                }
-                catch (error) { }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                // Handle any errors that occurred during the request
-                $("#toast_message").text("Error while clearing the cart");
-                $("#toast").addClass("invalid-bg");
-                $("#toast").animate({
-                    left: "3vw"
-                }, 700, function () {
-                    setTimeout(function () {
-                        $("#toast").animate({
-                            left: "-20vw"
-                        }, 1000, function () {
-                            $("#toast_message").text("");
-                            $("#toast").removeClass("invalid-bg");
-                        });
-                    }, 700);
-                });
-            }
-        });
-    }
-    catch (error) { }
-}
-
-function Order() {
+function CancelOrder(order_id, element) {
     try {
         $.ajax({
             url: "../controllers/orders_controller.php",
-            method: "GET",
+            method: "POST",
             data: {
-                action: "order"
+                action: "cancel-order",
+                order_id: order_id
             },
             success: function (response) {
                 // Handle the successful response from the server
@@ -164,9 +13,8 @@ function Order() {
                     response = JSON.parse(response);
                     if (response.hasOwnProperty("status")) {
                         if (response["status"]) {
-                            $(".cart-items-number").each(function () {
-                                $(this).text(`${response["items_count"]}`);
-                            });
+                            $(element).parent().parent().children('.status:first').text(`${response["order_status"]}`);
+                            $(element).parent().html(`<span class='inactive-color'>${response["order_status"]}</span>`);
 
                             $("#toast_message").text(response["message"]);
                             $("#toast").addClass("valid-bg");
@@ -182,8 +30,7 @@ function Order() {
                                     });
                                 }, 700);
                             });
-                        }
-                        else {
+                        } else {
                             $("#toast_message").text(response["message"]);
                             $("#toast").addClass("invalid-bg");
                             $("#toast").animate({
@@ -205,7 +52,7 @@ function Order() {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // Handle any errors that occurred during the request
-                $("#toast_message").text("Error while ordering the items");
+                $("#toast_message").text("Error while canceling the order");
                 $("#toast").addClass("invalid-bg");
                 $("#toast").animate({
                     left: "3vw"
@@ -225,23 +72,150 @@ function Order() {
     catch (error) { }
 }
 
-function increment(element) {
-    const input = $(element).parent().children("input:first");
-    if (parseInt(input.val()) >= 100)
-        return;
-    input.val(parseInt(input.val()) + 1);
+function ApproveOrder(order_id, element) {
+    try {
+        $.ajax({
+            url: "../controllers/orders_controller.php",
+            method: "POST",
+            data: {
+                action: "approve-order",
+                order_id: order_id
+            },
+            success: function (response) {
+                // Handle the successful response from the server
+                try {
+                    response = JSON.parse(response);
+                    if (response.hasOwnProperty("status")) {
+                        if (response["status"]) {
+                            $(element).parent().parent().children('.status:first').text(`${response["order_status"]}`);
+                            $(element).parent().html(`<span class='valid-color'>${response["order_status"]}</span>`);
+
+                            $("#toast_message").text(response["message"]);
+                            $("#toast").addClass("valid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        $("#toast").removeClass("valid-bg");
+                                    });
+                                }, 700);
+                            });
+                        } else {
+                            $("#toast_message").text(response["message"]);
+                            $("#toast").addClass("invalid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        $("#toast").removeClass("invalid-bg");
+                                    });
+                                }, 700);
+                            });
+                        }
+                    }
+                }
+                catch (error) { }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Handle any errors that occurred during the request
+                $("#toast_message").text("Error while approving the order");
+                $("#toast").addClass("invalid-bg");
+                $("#toast").animate({
+                    left: "3vw"
+                }, 700, function () {
+                    setTimeout(function () {
+                        $("#toast").animate({
+                            left: "-20vw"
+                        }, 1000, function () {
+                            $("#toast_message").text("");
+                            $("#toast").removeClass("invalid-bg");
+                        });
+                    }, 700);
+                });
+            }
+        });
+    }
+    catch (error) { }
 }
 
-function decrement(element) {
-    const input = $(element).parent().children("input:first");
-    if (parseInt(input.val()) <= 1)
-        return;
-    input.val(parseInt(input.val()) - 1);
-}
+function RejectOrder(order_id, element) {
+    try {
+        $.ajax({
+            url: "../controllers/orders_controller.php",
+            method: "POST",
+            data: {
+                action: "reject-order",
+                order_id: order_id
+            },
+            success: function (response) {
+                // Handle the successful response from the server
+                try {
+                    response = JSON.parse(response);
+                    if (response.hasOwnProperty("status")) {
+                        if (response["status"]) {
+                            $(element).parent().parent().children('.status:first').text(`${response["order_status"]}`);
+                            $(element).parent().html(`<span class='invalid-color'>${response["order_status"]}</span>`);
 
-function validate_item_number(element) {
-    if (parseInt($(element).val()) < 1)
-        $(element).val(1);
-    else if (parseInt($(element).val()) > 100)
-        $(element).val(100);
+                            $("#toast_message").text(response["message"]);
+                            $("#toast").addClass("valid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        $("#toast").removeClass("valid-bg");
+                                    });
+                                }, 700);
+                            });
+                        } else {
+                            $("#toast_message").text(response["message"]);
+                            $("#toast").addClass("invalid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        $("#toast").removeClass("invalid-bg");
+                                    });
+                                }, 700);
+                            });
+                        }
+                    }
+                }
+                catch (error) { }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Handle any errors that occurred during the request
+                $("#toast_message").text("Error while rejecting the order");
+                $("#toast").addClass("invalid-bg");
+                $("#toast").animate({
+                    left: "3vw"
+                }, 700, function () {
+                    setTimeout(function () {
+                        $("#toast").animate({
+                            left: "-20vw"
+                        }, 1000, function () {
+                            $("#toast_message").text("");
+                            $("#toast").removeClass("invalid-bg");
+                        });
+                    }, 700);
+                });
+            }
+        });
+    }
+    catch (error) { }
 }

@@ -38,65 +38,49 @@ if (!isset($_SESSION))
             <?php require_once("components/categories_shop.php"); ?>
 
             <main role="main" class="col ml-sm-auto p-4">
-                <?php
-                foreach ($items as $item) {
-                    ?>
-                    <div class="card bg-custom5" style="width: 18rem;">
-                        <img class="card-img-top" src="<?= $item->image ?>" alt="Card image cap">
-                        <div class="card-body color-custom4">
-                            <h5 class="card-title">
-                                <?= $item->name ?>
-                            </h5>
-                            <p class="card-text">
-                                <?= substr($item->description, 0, 70) ?>...
-                            </p>
-                            <p class="card-text color-custom1">
-                                Available:
-                                <?= ($item->quantity == 1) ? $item->quantity . "pc" : $item->quantity . "pcs" ?>
-                            </p>
-                            <h6 class="card-text color-custom1">
-                                <?= $item->price ?> eur
-                            </h6>
-                            <div class="input-group w-75 mt-2 quantity-container">
-                                <button class="btn btn-outline-secondary color-custom1" type="button"
-                                    onclick="decrement(this);">-</button>
-                                <input type="number" class="form-control text-center bg-custom2 color-custom1" value="1"
-                                    min="1" max="100" onchange="validate_item_number(this);">
-                                <button class="btn btn-outline-secondary color-custom1" type="button"
-                                    onclick="increment(this);">+</button>
-                            </div>
-                            <br>
-                            <button onclick="AddToCart(<?= $item->id ?>, this);" class="btn btn-primary add-to-cart">Add
-                                to cart</button>
-                        </div>
-                    </div>
+                <div class="row">
                     <?php
-                }
-                ?>
+                    foreach ($items as $item) {
+                        ?>
+                        <div class="card bg-custom5 m-2" style="width: 18rem;">
+                            <img class="card-img-top" src="<?= $item->image ?>" alt="Card image cap">
+                            <div class="card-body color-custom4">
+                                <h5 class="card-title">
+                                    <?= $item->name ?>
+                                </h5>
+                                <p class="card-text">
+                                    <?= substr($item->description, 0, 70) ?>...
+                                </p>
+                                <p class="card-text color-custom1">
+                                    Available:
+                                    <?= ($item->quantity == 1) ? $item->quantity . "pc" : $item->quantity . "pcs" ?>
+                                </p>
+                                <h6 class="card-text color-custom1">
+                                    Price:
+                                    <?= $item->price ?> eur
+                                </h6>
+                                <div class="input-group w-75 mt-2 quantity-container">
+                                    <button class="btn btn-outline-secondary color-custom1" type="button"
+                                        onclick="decrement(this);">-</button>
+                                    <input type="number" class="form-control text-center bg-custom2 color-custom1" value="1"
+                                        min="1" max="100" onchange="validate_item_number(this);">
+                                    <button class="btn btn-outline-secondary color-custom1" type="button"
+                                        onclick="increment(this);">+</button>
+                                </div>
+                                <br>
+                                <button onclick="AddToCart(<?= $item->id ?>, this);" class="btn btn-primary add-to-cart">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
             </main>
         </div>
     </div>
-    <div class="flex-grow-1"></div>
-    <footer class="footer">
-        <div class="row py-4 px-5 m-0">
-            <div class="col-md-3 text-center py-2 d-flex align-items-center justify-content-center">
-                <img src="media/logo.png" class="page-logo" alt="Shop footer Logo">
-            </div>
-            <div class="col text-center py-2 d-flex align-items-center justify-content-center">
-                <p class="copyright m-0">
-                    <span class="cp-symbol">&copy; 2023 Shop App company.</span> All rights reserved.
-                </p>
-            </div>
-            <div class="col-md-3 text-center py-2 d-flex align-items-center justify-content-center">
-                <div class="social-icons">
-                    <a href="#" target="_blank" class="px-2"><i class="fab fa-facebook"></i></a>
-                    <a href="#" target="_blank" class="px-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank" class="px-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" class="px-2"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+    <?php require_once "components/footer.php"; ?>
 
     <script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

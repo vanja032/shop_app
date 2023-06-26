@@ -36,23 +36,21 @@ class DAOStatus
         }
     }
 
-    public function GetByName($status_name): array
+    public function GetByName($status_name): Status
     {
         try {
             $statement = $this->database->prepare($this->SELECT_BY_NAME);
             $statement->bindValue(1, $status_name);
 
             $statement->execute();
-            $result = $statement->fetchAll();
-            $statuses = [];
+            $result = $statement->fetch();
             if ($result) {
-                foreach ($result as $row) {
-                    $statuses[] = new Status($row["status_id"], $row["name"], $row["description"], $row["created"]);
-                }
+                return new Status($result["status_id"], $result["name"], $result["description"], $result["created"]);
+            } else {
+                return new Status(null, null, null, null);
             }
-            return $statuses;
         } catch (Exception $ex) {
-            return [];
+            return new Status(null, null, null, null);
         }
     }
 

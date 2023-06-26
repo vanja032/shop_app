@@ -1,4 +1,6 @@
 <?php
+require_once "../models/structures/Cart.php";
+
 if (!isset($_SESSION))
     session_start();
 
@@ -18,9 +20,15 @@ if (isset($_SESSION["user"]))
 
     <script type="text/javascript" src="js/utils/jquery.min.js"></script>
     <script type="module" src="js/register.js"></script>
+    <script type="text/javascript" src="js/cart.js"></script>
 </head>
 
-<body class="bg-custom1">
+<body class="bg-custom1 d-flex flex-column">
+
+    <?php
+    $page = "signup";
+    require_once("components/nav.php");
+    ?>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -75,7 +83,10 @@ if (isset($_SESSION["user"]))
         </div>
     </div>
 
+    <?php require_once "components/footer.php"; ?>
+
     <script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 
 </html>

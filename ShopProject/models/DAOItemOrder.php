@@ -7,10 +7,11 @@ class DAOItemOrder
 {
     private $database;
 
-    private $SELECT_BY_ORDER = "SELECT io.created as io_created, item_id, i.name as i_name, i.description as i_desc, category_id, c.name as c_name, 
+    private $SELECT_BY_ORDER = "SELECT io.created as io_created, i.item_id, i.name as i_name, i.description as i_desc, c.category_id, c.name as c_name, 
     c.description as c_desc, c.created as c_created, picture_url, price, i.quantity as i_quantity, io.quantity as io_quantity, memo
     FROM items_orders io
     INNER JOIN items i ON io.item_id = i.item_id
+    INNER JOIN categories c ON i.category_id = c.category_id 
     WHERE order_id = ?";
 
     private $INSERT = "INSERT INTO items_orders(created, order_id, item_id, quantity, memo)

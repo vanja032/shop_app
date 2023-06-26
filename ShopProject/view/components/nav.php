@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse my-4 my-lg-1" id="topMenu">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item px-2 <?php if ($page == "home")
+            <li class="nav-item px-2 <?php if ($page == "index")
                 echo "active"; ?>">
                 <a class="nav-link" href="index.php">Home</a>
             </li>
@@ -42,16 +42,17 @@
             <?php } ?>
             <li class="nav-item px-2 <?php if ($page == "about")
                 echo "active"; ?>">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="about.php">About</a>
             </li>
             <li class="nav-item px-2 <?php if ($page == "contact")
                 echo "active"; ?>">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
             </li>
             <?php
             if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
                 ?>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2 <?php if ($page == "login")
+                    echo "active"; ?>">
                     <a class="nav-link" href="login.php">Login</a>
                 </li>
                 <?php
@@ -66,12 +67,12 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-profile">
                         <a class="dropdown-item <?php if ($page == "profile")
-                            echo "active"; ?>" href="#">Profile</a>
+                            echo "active"; ?>" href="profile.php">Profile</a>
                         <?php
                         if (strtolower($_SESSION["user"]->role->name) === "user") {
                             ?>
-                            <a class="dropdown-item <?php if ($page == "my-orders")
-                                echo "active"; ?>" href="#">My orders</a>
+                            <a class="dropdown-item <?php if ($page == "my_orders")
+                                echo "active"; ?>" href="my_orders.php">My orders</a>
                             <?php
                         }
                         ?>
@@ -79,7 +80,7 @@
                         if (strtolower($_SESSION["user"]->role->name) === "admin") {
                             ?>
                             <a class="dropdown-item <?php if ($page == "accounts")
-                                echo "active"; ?>" href="#">Accounts</a>
+                                echo "active"; ?>" href="accounts.php">Accounts</a>
                             <?php
                         }
                         ?>
@@ -87,12 +88,12 @@
                         if (strtolower($_SESSION["user"]->role->name) === "manager") {
                             ?>
                             <a class="dropdown-item <?php if ($page == "orders")
-                                echo "active"; ?>" href="#">Orders</a>
+                                echo "active"; ?>" href="orders.php">Orders</a>
                             <?php
                         }
                         ?>
                         <a class="dropdown-item <?php if ($page == "dashboard")
-                            echo "active"; ?>" href="#">Dashboard</a>
+                            echo "active"; ?>" href="dashboard.php">Dashboard</a>
                         <a class="dropdown-item"
                             href="../controllers/logout_controller.php?action=logout&location=<?= $page ?>">Logout</a>
                     </div>

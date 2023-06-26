@@ -2,6 +2,7 @@
 require_once "../database/database.php";
 require_once "structures/Item_Order.php";
 require_once "../utils/validation.php";
+require_once "DAOItem.php";
 require_once "DAOItemOrder.php";
 require_once "DAOStatus.php";
 require_once "structures/Cart.php";
@@ -10,13 +11,17 @@ class DAOOrder
 {
     private $database;
 
-    private $SELECT_ALL = "SELECT order_id, user_id, first_name, last_name, username, email, profile_picture, status_id, memo FROM orders o 
+    private $SELECT_ALL = "SELECT order_id, u.user_id, first_name, last_name, username, email, profile_picture, s.status_id, 
+    s.name as s_name, s.description as s_desc, s.created, memo FROM orders o 
     INNER JOIN statuses s ON o.status_id = s.status_id
     INNER JOIN users u ON o.user_id = u.user_id";
 
-    private $SELECT_BY_USER = "SELECT order_id, status_id, name, description, created, memo FROM orders WHERE user_id = ?";
+    private $SELECT_BY_USER = "SELECT order_id, o.user_id, s.status_id, 
+    s.name as s_name, s.description as s_desc, s.created, memo FROM orders o 
+    INNER JOIN statuses s ON o.status_id = s.status_id
+    WHERE user_id = ?";
 
-    private $SELECT_BY_STATUS = "SELECT order_id, user_id, first_name, last_name, username, email, profile_picture, status_id, memo FROM orders o 
+    private $SELECT_BY_STATUS = "SELECT order_id, u.user_id, first_name, last_name, username, email, profile_picture, s.status_id, memo FROM orders o 
     INNER JOIN statuses s ON o.status_id = s.status_id
     INNER JOIN users u ON o.user_id = u.user_id
     WHERE s.name = ?";
@@ -24,6 +29,8 @@ class DAOOrder
     private $INSERT = "INSERT INTO orders(user_id, status_id, memo) VALUES(?, ?, ?)";
 
     private $DELETE = "DELETE FROM orders WHERE order_id = ?";
+
+    private $UPDATE_USER_STATUS = "UPDATE orders SET status_id = ? WHERE order_id = ? AND user_id = ?";
 
     private $UPDATE_STATUS = "UPDATE orders SET status_id = ? WHERE order_id = ?";
 
@@ -45,7 +52,7 @@ class DAOOrder
                 foreach ($result as $row) {
                     $io = $io_dao->GetByOrder($row["order_id"]);
                     $user = new User($row["user_id"], $row["first_name"], $row["last_name"], $row["email"], $row["username"], $row["profile_picture"], null, new Role(null, null, null, null));
-                    $status = new Status($row["status_id"], $row["name"], $row["description"], $row["created"]);
+                    $status = new Status($row["status_id"], $row["s_name"], $row["s_desc"], $row["created"]);
                     $orders[] = new Order($row["order_id"], $user, $status, $io, $row["memo"]);
                 }
             }
@@ -68,7 +75,7 @@ class DAOOrder
                 $io_dao = new DAOItemOrder();
                 foreach ($result as $row) {
                     $io = $io_dao->GetByOrder($row["order_id"]);
-                    $status = new Status($row["status_id"], $row["name"], $row["description"], $row["created"]);
+                    $status = new Status($row["status_id"], $row["s_name"], $row["s_desc"], $row["created"]);
                     $orders[] = new Order($row["order_id"], $user, $status, $io, $row["memo"]);
                 }
             }
@@ -109,13 +116,13 @@ class DAOOrder
         $order_id = -1;
         try {
             $status_dao = new DAOStatus();
-            $status_id = $status_dao->GetByName("pending");
+            $status_id = $status_dao->GetByName("pending")->id;
 
-            if (count($status_id) == 0)
+            if ($status_id == null)
                 throw new Exception("Status not found");
             $statement = $this->database->prepare($this->INSERT);
             $statement->bindValue(1, $user_id);
-            $statement->bindValue(2, $status_id[0]->id);
+            $statement->bindValue(2, $status_id);
             $statement->bindValue(3, "Order by user No. $user_id");
 
             $result = $statement->execute();
@@ -147,7 +154,25 @@ class DAOOrder
     {
         try {
             $status_dao = new DAOStatus();
-            $status_id = $status_dao->GetByName($status_name);
+            $status_id = $status_dao->GetByName($status_name)->id;
+
+            if ($status_name == "approved") {
+                $item_dao = new DAOItem();
+                $io_dao = new DAOItemOrder();
+
+                $items_orders = $io_dao->GetByOrder($order_id);
+                foreach ($items_orders as $io) {
+                    if ($io->item->quantity - $io->quantity < 0) {
+                        throw new Exception("Error while updating items quantity.");
+                    }
+                }
+                foreach ($items_orders as $io) {
+                    $tmp_result = $item_dao->UpdateQuantity($io->item->id, ($io->item->quantity - $io->quantity));
+                    if (!$tmp_result) {
+                        throw new Exception("Error while updating items quantity.");
+                    }
+                }
+            }
 
             $statement = $this->database->prepare($this->UPDATE_STATUS);
             $statement->bindValue(1, $status_id);
@@ -155,18 +180,28 @@ class DAOOrder
 
             $result = $statement->execute();
             if ($result) {
-                if ($status_name == "approved") {
-                    $item_dao = new DAOItem();
-                    $io_dao = new DAOItemOrder();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
 
-                    $items_orders = $io_dao->GetByOrder($order_id);
-                    foreach ($items_orders as $io) {
-                        $tmp_result = $item_dao->UpdateQuantity($io->item->id, ($io->item->quantity - $io->quantity));
-                        if (!$tmp_result) {
-                            throw new Exception("Error while updating items quantity.");
-                        }
-                    }
-                }
+    public function UpdateUserStatus($order_id, $status_name, $user_id)
+    {
+        try {
+            $status_dao = new DAOStatus();
+            $status_id = $status_dao->GetByName($status_name)->id;
+
+            $statement = $this->database->prepare($this->UPDATE_USER_STATUS);
+            $statement->bindValue(1, $status_id);
+            $statement->bindValue(2, $order_id);
+            $statement->bindValue(3, $user_id);
+
+            $result = $statement->execute();
+            if ($result) {
                 return true;
             } else {
                 return false;

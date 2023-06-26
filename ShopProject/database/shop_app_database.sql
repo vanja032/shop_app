@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 03:40 AM
+-- Generation Time: Jun 26, 2023 at 06:52 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -73,7 +73,8 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `name`, `description`, `category_id`, `picture_url`, `price`, `quantity`) VALUES
-(1, 'Tom Tailor Parfem for him, 30ml', 'Živi svoj život. Deli svoju sreću, bez kompromisa. Jesi li spreman da kažes da?\r\nU nemirnim vremenima globalne tuge, čeznemo za bezbrižnom srećom. Samo hrabar optimizam je jedina posledica. Usudite se biti autentični, usudite se reći DA avanturama. Idite tamo gde vas slave, ne gde vas tolerišu!', 6, 'https://www.shoppster.rs/cdn-cgi/image/format=auto/https://www.shoppster.rs/medias/4051395172144-01-1-ung-680Wx510H?context=bWFzdGVyfGltYWdlc3wzMTUyOXxpbWFnZS9qcGVnfGFEbGtMMmc0Wmk4eE1UYzFOemd5T1RZMU1qVXhNQzgwTURVeE16azFNVGN5TVRRMFh6QXhYekZmZFc1bkxUWTRNRmQ0TlRFd1NBfDczMmVlNDQzOWQxNGVmMmQxYmI3MWJhY2QxZTEyYWMwZjA5NzY1ZmIwYzk3YzQ4NzM3MTAwZDA5MGZiN2QxMDI', 21.99, 5);
+(1, 'Tom Tailor Parfem for him, 30ml', 'Živi svoj život. Deli svoju sreću, bez kompromisa. Jesi li spreman da kažes da?\r\nU nemirnim vremenima globalne tuge, čeznemo za bezbrižnom srećom. Samo hrabar optimizam je jedina posledica. Usudite se biti autentični, usudite se reći DA avanturama. Idite tamo gde vas slave, ne gde vas tolerišu!', 6, 'https://www.shoppster.rs/cdn-cgi/image/format=auto/https://www.shoppster.rs/medias/4051395172144-01-1-ung-680Wx510H?context=bWFzdGVyfGltYWdlc3wzMTUyOXxpbWFnZS9qcGVnfGFEbGtMMmc0Wmk4eE1UYzFOemd5T1RZMU1qVXhNQzgwTURVeE16azFNVGN5TVRRMFh6QXhYekZmZFc1bkxUWTRNRmQ0TlRFd1NBfDczMmVlNDQzOWQxNGVmMmQxYmI3MWJhY2QxZTEyYWMwZjA5NzY1ZmIwYzk3YzQ4NzM3MTAwZDA5MGZiN2QxMDI', 21.99, 1),
+(2, 'Clatronic Ručni usisivač AKS 832', 'Karakteristike:\r\nOprema: Dva uzana nastavka nastavka, dodatak za vlažno usisavanje, četka\r\nPogodan za suvo i vlažno usisavanje\r\nVečni, perivi filter\r\nBaterija: 1400 mAh\r\nAdapter: 230 V, 50 Hz 12 V', 2, 'https://www.shoppster.rs/cdn-cgi/image/format=auto,fit=contain,width=575/https://www.shoppster.rs/medias/4006160810554-01-1-ung-2000Wx1500H?context=bWFzdGVyfGltYWdlc3wyMDU1MDZ8aW1hZ2UvanBlZ3xhRGxtTDJnMllpOHhNREE1TWpReU9USTNPVEkyTWk4ME1EQTJNVFl3T0RFd05UVTBYekF4WHpGZmRXNW5MVEl3TURCWGVERTFNREJJfDllNWE2NTgxZjIzZWQxZGNhZDE1YWE4NDZlMDBhYTc1NTIwNmIyM2IxMmI2YTEyNmUyOWRjMzg1NWY5ZTc1Y2E', 49.99, 2);
 
 -- --------------------------------------------------------
 
@@ -102,7 +103,11 @@ INSERT INTO `items_orders` (`created`, `order_id`, `item_id`, `quantity`, `memo`
 ('2023-06-26 03:22:09', 17, 1, 17, 'Order No. 17, Item No. 1, Quantity 17'),
 ('2023-06-26 03:22:22', 18, 1, 4, 'Order No. 18, Item No. 1, Quantity 4'),
 ('2023-06-26 03:23:08', 19, 1, 1, 'Order No. 19, Item No. 1, Quantity 1'),
-('2023-06-26 03:39:23', 20, 1, 22, 'Order No. 20, Item No. 1, Quantity 22');
+('2023-06-26 03:39:23', 20, 1, 22, 'Order No. 20, Item No. 1, Quantity 22'),
+('2023-06-26 14:41:22', 21, 1, 4, 'Order No. 21, Item No. 1, Quantity 4'),
+('2023-06-26 15:27:36', 22, 2, 1, 'Order No. 22, Item No. 2, Quantity 1'),
+('2023-06-26 17:46:55', 23, 1, 6, 'Order No. 23, Item No. 1, Quantity 6'),
+('2023-06-26 17:46:55', 23, 2, 11, 'Order No. 23, Item No. 2, Quantity 11');
 
 -- --------------------------------------------------------
 
@@ -123,14 +128,17 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `user_id`, `status_id`, `memo`) VALUES
 (12, 20, 1, 'Order by user No. 20'),
-(13, 20, 1, 'Order by user No. 20'),
-(14, 20, 1, 'Order by user No. 20'),
-(15, 20, 1, 'Order by user No. 20'),
+(13, 20, 3, 'Order by user No. 20'),
+(14, 20, 4, 'Order by user No. 20'),
+(15, 20, 4, 'Order by user No. 20'),
 (16, 20, 1, 'Order by user No. 20'),
 (17, 20, 1, 'Order by user No. 20'),
-(18, 20, 1, 'Order by user No. 20'),
-(19, 20, 1, 'Order by user No. 20'),
-(20, 20, 1, 'Order by user No. 20');
+(18, 20, 2, 'Order by user No. 20'),
+(19, 20, 4, 'Order by user No. 20'),
+(20, 20, 1, 'Order by user No. 20'),
+(21, 21, 4, 'Order by user No. 21'),
+(22, 21, 2, 'Order by user No. 21'),
+(23, 20, 4, 'Order by user No. 20');
 
 -- --------------------------------------------------------
 
@@ -150,7 +158,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`role_id`, `name`, `description`, `created`) VALUES
-(1, 'user', 'User role for shop users.', '2023-06-16 01:32:38');
+(1, 'user', 'User role for shop users.', '2023-06-16 01:32:38'),
+(2, 'admin', 'Administrator user', '2023-06-26 18:31:04'),
+(3, 'manager', 'Manager user', '2023-06-26 18:31:14');
 
 -- --------------------------------------------------------
 
@@ -198,8 +208,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `username`, `email`, `password_hash`, `profile_picture`, `role_id`, `created`) VALUES
-(20, 'Petar', 'Petrovic', 'petar123', 'petar@email.com', 'd38031a34777569cb437ba620952f099e62c9cf4746313c23370a936a5093dbf47b0dad05670567ec507ddadac210ff29dba3b835558c10ced16829c367cbcc5', '', 1, '2023-06-16 12:29:01'),
-(21, 'Zikica', 'Zikica', 'zikica123', 'zikica@gmail.com', '23e9b276dcba452db20af6af4b18822fb964ccc400506b48711c74b36d5787687ad1199a398e66cd14c2bc39e1179128ca6529180675bcb5373b9d3a4a163881', '', 1, '2023-06-22 10:49:47');
+(20, 'Petar', 'Petrovic', 'petar123', 'petar@email.com', 'd38031a34777569cb437ba620952f099e62c9cf4746313c23370a936a5093dbf47b0dad05670567ec507ddadac210ff29dba3b835558c10ced16829c367cbcc5', 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_1280.jpg', 1, '2023-06-16 12:29:01'),
+(21, 'Zikica', 'Zikica', 'zikica123', 'zikica@gmail.com', '23e9b276dcba452db20af6af4b18822fb964ccc400506b48711c74b36d5787687ad1199a398e66cd14c2bc39e1179128ca6529180675bcb5373b9d3a4a163881', 'https://cdn.pixabay.com/photo/2019/05/24/10/59/business-man-4226005_1280.jpg', 1, '2023-06-22 10:49:47'),
+(22, 'Milos', 'Milosevic', 'manager123', 'manager@email.com', '23e9b276dcba452db20af6af4b18822fb964ccc400506b48711c74b36d5787687ad1199a398e66cd14c2bc39e1179128ca6529180675bcb5373b9d3a4a163881', 'https://cdn.pixabay.com/photo/2019/05/24/10/59/business-man-4226005_1280.jpg', 3, '2023-06-22 10:49:47'),
+(23, 'Administrator', 'Administrator', 'administrator123', 'admin@email.com', '23e9b276dcba452db20af6af4b18822fb964ccc400506b48711c74b36d5787687ad1199a398e66cd14c2bc39e1179128ca6529180675bcb5373b9d3a4a163881', 'https://cdn.pixabay.com/photo/2019/05/24/10/59/business-man-4226005_1280.jpg', 2, '2023-06-22 10:49:47');
 
 --
 -- Indexes for dumped tables
@@ -269,19 +281,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `item_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `statuses`
@@ -293,7 +305,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

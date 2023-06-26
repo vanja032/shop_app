@@ -18,6 +18,13 @@ class DAOItem
     ON i.category_id = c.category_id
     WHERE i.category_id = ?";
 
+    private $SELECT_LAST = "SELECT item_id, i.name AS i_name, i.description AS i_desc, i.category_id, 
+    picture_url, price, quantity, c.name AS c_name, c.description AS c_desc, c.created AS c_created
+    FROM items i LEFT JOIN categories c
+    ON i.category_id = c.category_id
+    ORDER BY item_id DESC
+    LIMIT :limit";
+
     private $UPDATE_QUANTITY = "UPDATE items SET quantity = ? WHERE item_id = ?";
 
     public function __construct()
@@ -59,6 +66,26 @@ class DAOItem
                 foreach ($result as $row) {
                     $items[] = new Item($row["item_id"], $row["i_name"], $row["i_desc"], $category, $row["picture_url"], $row["price"], $row["quantity"]);
                 }
+            }
+            return $items;
+        } catch (Exception $ex) {
+            return [];
+        }
+    }
+
+    public function GetLast($number): array
+    {
+        try {
+            $statement = $this->database->prepare($this->SELECT_LAST);
+            $statement->bindParam(":limit", $number, PDO::PARAM_INT);
+
+            $statement->execute();
+            $result = $statement->fetchAll();
+            $items = [];
+
+            foreach ($result as $row) {
+                $category = new Category($row["category_id"], $row["c_name"], $row["c_desc"], $row["c_created"]);
+                $items[] = new Item($row["item_id"], $row["i_name"], $row["i_desc"], $category, $row["picture_url"], $row["price"], $row["quantity"]);
             }
             return $items;
         } catch (Exception $ex) {

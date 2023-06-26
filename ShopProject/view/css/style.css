@@ -223,6 +223,46 @@ html {
 }
 
 
+/*HOME*/
+.carousel-inner .carousel-item {
+    height: 60vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* border: 0.2em solid #bb2727;
+    border-radius: 1vw; */
+}
+
+
+/*PROFILE*/
+.profile_picture {
+    width: 80%;
+}
+
+/*ORDERS*/
+.table,
+.table-bordered,
+.table-bordered thead tr th,
+.table-bordered tbody tr th,
+.table-bordered tbody tr td {
+    border: 0.15em solid #4b4b4b;
+    background-color: #353535;
+}
+
+.order-action {
+    background-color: #ffa600;
+    color: #2c2c2c;
+    border: none;
+    border: 0.15em solid #ffa600;
+}
+
+.order-action:hover {
+    background-color: #2c2c2c;
+    color: #e2e2e2;
+    border: 0.15em solid #ffa600;
+}
+
+
 /*VALIDATION*/
 .valid-color {
     color: #cfff76;
@@ -230,6 +270,14 @@ html {
 
 .invalid-color {
     color: #ff3f3f;
+}
+
+.warning-color {
+    color: #ffae35;
+}
+
+.inactive-color {
+    color: #696969;
 }
 
 .valid-border {

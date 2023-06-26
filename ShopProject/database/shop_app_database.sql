@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 01:11 AM
+-- Generation Time: Jun 26, 2023 at 02:51 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -89,6 +89,14 @@ CREATE TABLE `items_orders` (
   `memo` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `items_orders`
+--
+
+INSERT INTO `items_orders` (`created`, `order_id`, `item_id`, `quantity`, `memo`) VALUES
+('2023-06-26 02:43:46', 12, 1, 18, 'Order No. 12, Item No. 1, Quantity 18'),
+('2023-06-26 02:49:42', 13, 1, 4, 'Order No. 13, Item No. 1, Quantity 4');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +109,14 @@ CREATE TABLE `orders` (
   `status_id` int(11) NOT NULL,
   `memo` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `status_id`, `memo`) VALUES
+(12, 20, 1, 'Order by user No. 20'),
+(13, 20, 1, 'Order by user No. 20');
 
 -- --------------------------------------------------------
 
@@ -134,6 +150,16 @@ CREATE TABLE `statuses` (
   `description` varchar(200) DEFAULT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `statuses`
+--
+
+INSERT INTO `statuses` (`status_id`, `name`, `description`, `created`) VALUES
+(1, 'pending', 'Pending status', '2023-06-26 02:22:14'),
+(2, 'approved', 'Approved status', '2023-06-26 02:24:50'),
+(3, 'rejected', 'Rejected status', '2023-06-26 02:25:07'),
+(4, 'canceled', 'Canceled status', '2023-06-26 02:25:19');
 
 -- --------------------------------------------------------
 
@@ -235,7 +261,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -247,7 +273,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

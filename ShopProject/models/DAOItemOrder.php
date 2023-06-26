@@ -14,7 +14,7 @@ class DAOItemOrder
     WHERE order_id = ?";
 
     private $INSERT = "INSERT INTO items_orders(created, order_id, item_id, quantity, memo)
-    VALUES(CURRENT_TIMESTAMP, ?, ?, ?, 'Order No. ?, Item No. ?, Quantity ?')";
+    VALUES(CURRENT_TIMESTAMP, ?, ?, ?, ?)";
 
     private $DELETE_BY_ORDER = "DELETE FROM items_orders WHERE order_id = ?";
 
@@ -51,9 +51,7 @@ class DAOItemOrder
             $statement->bindValue(1, $order_id);
             $statement->bindValue(2, $item_id);
             $statement->bindValue(3, $quantity);
-            $statement->bindValue(4, $order_id);
-            $statement->bindValue(5, $item_id);
-            $statement->bindValue(6, $quantity);
+            $statement->bindValue(4, "Order No. $order_id, Item No. $item_id, Quantity $quantity");
 
             $result = $statement->execute();
             if ($result) {

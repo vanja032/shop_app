@@ -94,7 +94,7 @@
                         <a class="dropdown-item <?php if ($page == "dashboard")
                             echo "active"; ?>" href="#">Dashboard</a>
                         <a class="dropdown-item"
-                            href="../controllers/logout_controller.php?action=logout&location=shop">Logout</a>
+                            href="../controllers/logout_controller.php?action=logout&location=<?= $page ?>">Logout</a>
                     </div>
                 </li>
                 <?php
@@ -132,10 +132,8 @@
                             } ?>
                         </span>
                     </h5>
-                    <a class="dropdown-item"
-                        href="../controllers/logout_controller.php?action=logout&location=shop">Order</a>
-                    <a class="dropdown-item"
-                        href="../controllers/logout_controller.php?action=logout&location=shop">Clear</a>
+                    <button class="dropdown-item" onclick="Order();">Order</button>
+                    <button class="dropdown-item" onclick="ClearCart();">Clear</button>
                 </div>
             </li>
         </ul>

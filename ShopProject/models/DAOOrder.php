@@ -21,7 +21,7 @@ class DAOOrder
     INNER JOIN users u ON o.user_id = u.user_id
     WHERE s.name = ?";
 
-    private $INSERT = "INSERT INTO orders(user_id, status_id, memo) VALUES(?, ?, 'Order by user No. ?')";
+    private $INSERT = "INSERT INTO orders(user_id, status_id, memo) VALUES(?, ?, ?)";
 
     private $DELETE = "DELETE FROM orders WHERE order_id = ?";
 
@@ -111,10 +111,12 @@ class DAOOrder
             $status_dao = new DAOStatus();
             $status_id = $status_dao->GetByName("pending");
 
+            if (count($status_id) == 0)
+                throw new Exception("Status not found");
             $statement = $this->database->prepare($this->INSERT);
             $statement->bindValue(1, $user_id);
-            $statement->bindValue(2, $status_id);
-            $statement->bindValue(3, $user_id);
+            $statement->bindValue(2, $status_id[0]->id);
+            $statement->bindValue(3, "Order by user No. $user_id");
 
             $result = $statement->execute();
             if ($result) {
@@ -131,9 +133,11 @@ class DAOOrder
             }
         } catch (Exception $ex) {
             if ($result && $order_id > -1) {
+                $io_dao->DeleteByOrder($order_id);
+
                 $statement = $this->database->prepare($this->DELETE);
                 $statement->bindValue(1, $order_id);
-                $io_dao->DeleteByOrder($order_id);
+                $statement->execute();
             }
             return false;
         }

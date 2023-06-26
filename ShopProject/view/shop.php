@@ -1,5 +1,6 @@
 <?php
 require_once "../models/structures/User.php";
+require_once "../models/structures/Cart.php";
 require_once "../controllers/items_controller.php";
 
 if (!isset($_SESSION))
@@ -56,16 +57,16 @@ if (!isset($_SESSION))
                             <h6 class="card-text color-custom1">
                                 <?= $item->price ?> eur
                             </h6>
-                            <div class="input-group w-75 mt-2">
+                            <div class="input-group w-75 mt-2 quantity-container">
                                 <button class="btn btn-outline-secondary color-custom1" type="button"
                                     onclick="decrement(this);">-</button>
-                                <input type="number" class="form-control text-center bg-custom2 color-custom1" value="0"
-                                    min="0" max="100" onchange="validate_item_number(this);">
+                                <input type="number" class="form-control text-center bg-custom2 color-custom1" value="1"
+                                    min="1" max="100" onchange="validate_item_number(this);">
                                 <button class="btn btn-outline-secondary color-custom1" type="button"
                                     onclick="increment(this);">+</button>
                             </div>
                             <br>
-                            <button onclick="add_to_cart(<?= $item->id ?>, 1);" class="btn btn-primary add-to-cart">Add
+                            <button onclick="AddToCart(<?= $item->id ?>, this);" class="btn btn-primary add-to-cart">Add
                                 to cart</button>
                         </div>
                     </div>

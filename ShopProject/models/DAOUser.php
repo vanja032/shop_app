@@ -14,7 +14,7 @@ class DAOUser
     u.profile_picture, u.role_id, u.created AS u_created, r.name, r.description, r.created AS r_created
     FROM users u INNER JOIN roles r
     ON u.role_id = r.role_id
-    WHERE username = ? OR email = ?";
+    WHERE username = LOWER(?) OR email = LOWER(?)";
 
     public function __construct()
     {

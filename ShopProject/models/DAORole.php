@@ -5,7 +5,7 @@ require_once "structures/Role.php";
 class DAORole
 {
     private $database;
-    private $READ_ROLE = "SELECT role_id FROM roles WHERE name = ?";
+    private $READ_ROLE = "SELECT role_id FROM roles WHERE name = LOWER(?)";
 
     public function __construct()
     {

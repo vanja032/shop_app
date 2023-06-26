@@ -8,7 +8,7 @@ class DAOStatus
 
     private $SELECT_ALL = "SELECT status_id, name, description, created FROM statuses";
 
-    private $SELECT_BY_NAME = "SELECT status_id, name, description, created FROM statuses WHERE name = ?";
+    private $SELECT_BY_NAME = "SELECT status_id, name, description, created FROM statuses WHERE name = LOWER(?)";
 
     private $INSERT = "INSERT INTO statuses(name, description, created) VALUES(?, ?, CURRENT_TIMESTAMP)";
 

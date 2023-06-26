@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 02:51 AM
+-- Generation Time: Jun 26, 2023 at 03:40 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.4.29
 
@@ -95,7 +95,14 @@ CREATE TABLE `items_orders` (
 
 INSERT INTO `items_orders` (`created`, `order_id`, `item_id`, `quantity`, `memo`) VALUES
 ('2023-06-26 02:43:46', 12, 1, 18, 'Order No. 12, Item No. 1, Quantity 18'),
-('2023-06-26 02:49:42', 13, 1, 4, 'Order No. 13, Item No. 1, Quantity 4');
+('2023-06-26 02:49:42', 13, 1, 4, 'Order No. 13, Item No. 1, Quantity 4'),
+('2023-06-26 03:09:39', 14, 1, 1, 'Order No. 14, Item No. 1, Quantity 1'),
+('2023-06-26 03:13:07', 15, 1, 3, 'Order No. 15, Item No. 1, Quantity 3'),
+('2023-06-26 03:19:54', 16, 1, 21, 'Order No. 16, Item No. 1, Quantity 21'),
+('2023-06-26 03:22:09', 17, 1, 17, 'Order No. 17, Item No. 1, Quantity 17'),
+('2023-06-26 03:22:22', 18, 1, 4, 'Order No. 18, Item No. 1, Quantity 4'),
+('2023-06-26 03:23:08', 19, 1, 1, 'Order No. 19, Item No. 1, Quantity 1'),
+('2023-06-26 03:39:23', 20, 1, 22, 'Order No. 20, Item No. 1, Quantity 22');
 
 -- --------------------------------------------------------
 
@@ -116,7 +123,14 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `user_id`, `status_id`, `memo`) VALUES
 (12, 20, 1, 'Order by user No. 20'),
-(13, 20, 1, 'Order by user No. 20');
+(13, 20, 1, 'Order by user No. 20'),
+(14, 20, 1, 'Order by user No. 20'),
+(15, 20, 1, 'Order by user No. 20'),
+(16, 20, 1, 'Order by user No. 20'),
+(17, 20, 1, 'Order by user No. 20'),
+(18, 20, 1, 'Order by user No. 20'),
+(19, 20, 1, 'Order by user No. 20'),
+(20, 20, 1, 'Order by user No. 20');
 
 -- --------------------------------------------------------
 
@@ -261,7 +275,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `roles`

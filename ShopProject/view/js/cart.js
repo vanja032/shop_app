@@ -18,6 +18,41 @@ function AddToCart(item_id, element) {
                             $(".cart-items-number").each(function () {
                                 $(this).text(`${response["items_count"]}`);
                             });
+                            $(element).parent().children('.quantity-container:first').children('input:first').val(1);
+
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("valid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("valid-bg");
+                                    });
+                                }, 700);
+                            });
+                        } else {
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("invalid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("invalid-bg");
+                                    });
+                                }, 700);
+                            });
                         }
                     }
                 }
@@ -48,6 +83,40 @@ function ClearCart() {
                             $(".cart-items-number").each(function () {
                                 $(this).text(`${response["items_count"]}`);
                             });
+
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("valid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("valid-bg");
+                                    });
+                                }, 700);
+                            });
+                        } else {
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("invalid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("invalid-bg");
+                                    });
+                                }, 700);
+                            });
                         }
                     }
                 }
@@ -77,6 +146,41 @@ function Order() {
                         if (response["status"]) {
                             $(".cart-items-number").each(function () {
                                 $(this).text(`${response["items_count"]}`);
+                            });
+
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("valid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("valid-bg");
+                                    });
+                                }, 700);
+                            });
+                        }
+                        else {
+                            $("#toast_message").text(response["message"]);
+                            //$("#toast").css("display", "block");
+                            $("#toast").addClass("invalid-bg");
+                            $("#toast").animate({
+                                left: "3vw"
+                            }, 700, function () {
+                                setTimeout(function () {
+                                    $("#toast").animate({
+                                        left: "-20vw"
+                                    }, 1000, function () {
+                                        $("#toast_message").text("");
+                                        //$("#toast").css("display", "none");
+                                        $("#toast").removeClass("invalid-bg");
+                                    });
+                                }, 700);
                             });
                         }
                     }

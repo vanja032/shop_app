@@ -208,9 +208,24 @@ html {
 }
 
 
+/*TOAST*/
+#toast {
+    position: fixed;
+    left: -20vw;
+    bottom: 3vw;
+    font-size: 1.3em;
+    /*display: none;*/
+    color: #3a3a3a;
+    border: 0.1em solid #3a3a3a;
+    font-weight: 600;
+    /*opacity: 0.8;*/
+    border-radius: 2vw;
+}
+
+
 /*VALIDATION*/
 .valid-color {
-    color: #a8ff76;
+    color: #cfff76;
 }
 
 .invalid-color {
@@ -218,9 +233,17 @@ html {
 }
 
 .valid-border {
-    border-color: #a8ff76;
+    border-color: #cfff76;
 }
 
 .invalid-border {
     border-color: #ff3f3f;
+}
+
+.valid-bg {
+    background-color: #cfff76;
+}
+
+.invalid-bg {
+    background-color: #ff3f3f;
 }

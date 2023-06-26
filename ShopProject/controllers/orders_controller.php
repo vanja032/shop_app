@@ -40,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             } else {
                 echo json_encode(["status" => false, "message" => "Ordering items failed"]);
             }
+        } else {
+            echo json_encode(["status" => false, "message" => "Ordering items failed"]);
         }
     }
 }

@@ -100,6 +100,7 @@ if (!isset($_SESSION))
 
     <script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <?php require_once "components/toast.php"; ?>
 </body>
 
 </html>

@@ -37,7 +37,7 @@ $(document).ready(() => {
             $("#password").addClass("invalid-border");
 
             $("#password").removeClass("valid-color");
-            $("#l_name").removeClass("valid-border");
+            $("#password").removeClass("valid-border");
         }
         else {
             $("#password").removeClass("invalid-color");
